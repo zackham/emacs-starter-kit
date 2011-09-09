@@ -1,0 +1,47 @@
+(setq dotfiles-dir (file-name-directory
+                   (or (buffer-file-name) load-file-name)))
+
+;; Load up ELPA, the package manager
+
+(add-to-list 'load-path dotfiles-dir)
+
+(require 'vimpulse)
+(require 'color-theme-zenburn)
+(color-theme-zenburn)
+
+(provide 'zack-init)
+
+;; Org-mode settings
+;; use newer org 7.7
+(require 'org-install)
+
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+(global-font-lock-mode 1)
+
+;; http://orgmode.org/manual/Clocking-work-time.html#Clocking-work-time
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
+; global Effort estimate values
+; not sure if this is working...
+(setq org-global-properties (quote (("Effort_ALL" . "0:10 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00 8:00"))))
+
+;; make sure we're using habits
+(add-to-list 'org-modules 'org-habit)
+(require 'org-habit)
+
+(setq org-startup-indented 1)
+(setq org-odd-levels-only 1)
+
+(setq org-agenda-files '("/media/truecrypt1/org"))
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@/!)")))
+

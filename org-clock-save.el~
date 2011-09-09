@@ -1,0 +1,2 @@
+;; org-persist.el - zack-desktop at <2011-09-07 Wed 11:46>
+(setq stored-clock-history '(("/media/truecrypt1/org/personal.org" . 1074) ("/media/truecrypt1/org/personal.org" . 9028) ("/media/truecrypt1/org/default.org" . 1561) ("/media/truecrypt1/org/personal.org" . 372) ("/media/truecrypt1/org/lommekjent.org" . 171)))
