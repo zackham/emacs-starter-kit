@@ -105,3 +105,18 @@
 (require 'smtpmail) 
 (setq message-send-mail-function 'smtpmail-send-it) 
 (require 'starttls)
+
+;; set up tags for rinari
+(setq rinari-tags-file-name "TAGS")
+
+;; set default org timer to 25 minutes for pomodoro
+(setq org-timer-default-timer 25)
+
+;; every time i clock in, set a 25 minute timer (unless a timer is
+;; going)
+(add-hook 'org-clock-in-hook '(lambda () 
+      (if (not org-timer-current-timer) 
+          (org-timer-set-timer '(16)))))
+
+;; i dont like auto-fill-mode in erc
+(add-hook 'erc-mode-hook (lambda () (auto-fill-mode 0)))
