@@ -66,7 +66,7 @@ exec-to-string command, but it works and seems fast"
                       temp-file
                       (file-name-directory buffer-file-name))))
     ;; Invoke ruby with '-c' to get syntax checking
-    (list "ruby" (list "-c" local-file))))
+    (list "/Users/zack/.rvm/rubies/ruby-1.9.3-p0/bin/ruby" (list "-c" local-file))))
 
 (defun flymake-ruby-enable ()
   (when (and buffer-file-name

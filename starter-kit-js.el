@@ -11,7 +11,7 @@
 
 (defmacro esk-configure-javascript (name)
   (let ((sym (intern name))
-        (mode (intern (concat name "-mode")))
+        (mode (intern "js2-mode"))
         (hook (intern (concat name "-mode-hook")))
         (keymap (intern (concat name "-mode-map")))
         (indent (intern (concat name "-indent-level"))))

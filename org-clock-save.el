@@ -1,2 +1,2 @@
-;; org-persist.el - zack-desktop at <2011-09-19 Mon 13:53>
-(setq stored-clock-history '(("/media/truecrypt1/org/lommekjent.org" . 426) ("/media/truecrypt1/org/lommekjent.org" . 640) ("/media/truecrypt1/org/lommekjent.org" . 877) ("/media/truecrypt1/org/lommekjent.org" . 1269) ("/media/truecrypt1/org/lommekjent.org" . 3187)))
+;; org-persist.el - zacks-imac-2 at <2014-03-21 Fri 11:58>
+(setq stored-clock-history '(("/Users/zack/org/rwgps.org" . 318168) ("/Users/zack/org/rwgps.org" . 319315) ("/Users/zack/org/rwgps.org" . 314577) ("/Users/zack/org/refile.org" . 9070) ("/Users/zack/org/rwgps.org" . 318346)))
