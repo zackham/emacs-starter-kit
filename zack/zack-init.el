@@ -949,3 +949,7 @@ When not restricted, skip project and sub-project tasks, habits, and project rel
   (interactive)
   (switch-to-buffer "*Org Agenda*")
   (delete-other-windows))
+
+(require 'epa-file)
+(setq epg-gpg-program "/usr/local/bin/gpg")
+(setq epa-file-inhibit-auto-save t)
