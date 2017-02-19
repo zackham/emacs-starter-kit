@@ -84,7 +84,7 @@
 (setq org-startup-indented t)
 (setq org-odd-levels-only nil)
 
-(setq org-agenda-files '("~/org"))
+(setq org-agenda-files '("~/org/system29.org.gpg" "~/org/relleno.org.gpg" "~/org/rwgps.org" "~/org/refile.org"))
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "NEXT(n)" "STARTED(s)" "|" "DONE(d!/!)")
               (sequence "WAITING(w@/!)" "SOMEDAY(S!)" "|" "CANCELLED(c@/!)" "PHONE")
@@ -121,7 +121,7 @@
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, and org-protocol
 (setq org-capture-templates
       (quote (("t" "todo" entry (file "~/org/refile.org")
-               "* TODO %?\n%U\n%a\n  %i")
+               "* TODO %?\n%U\n%a\n  %i")              
               ("n" "note" entry (file "~/org/refile.org")
                "* %? :NOTE:\n%U\n%a\n  %i")
               ("j" "Journal" entry (file+datetree "~/org/diary.org")
@@ -144,41 +144,52 @@
                  '(todo-state-down effort-up category-keep))))
               (" " "Agenda"
                ((agenda "" nil)
-                (tags "REFILE"
-                      ((org-agenda-overriding-header "Notes and Tasks to Refile")
-                       (org-agenda-overriding-header "Tasks to Refile")))
-                (tags-todo "-WAITING-CANCELLED/!NEXT|STARTED"
-                           ((org-agenda-overriding-header "Next Tasks")
-                            (org-agenda-skip-function 'bh/skip-projects-and-habits)
-                            (org-agenda-todo-ignore-scheduled t)
-                            (org-agenda-todo-ignore-deadlines t)
-                            (org-tags-match-list-sublevels t)
-                            (org-agenda-sorting-strategy
-                             '(todo-state-down effort-up category-keep))))
-                (tags-todo "-REFILE-CANCELLED/!-NEXT-STARTED-WAITING"
-                           ((org-agenda-overriding-header "Tasks")
-                            (org-agenda-skip-function 'bh/skip-projects-and-habits)
-                            (org-tags-match-list-sublevels 'indented)
-                            (org-agenda-todo-ignore-scheduled t)
-                            (org-agenda-todo-ignore-deadlines t)
-                            (org-agenda-sorting-strategy
-                             '(category-keep))))
-                (tags-todo "-CANCELLED/!"
-                           ((org-agenda-overriding-header "Stuck Projects")
-                            (org-tags-match-list-sublevels 'indented)
-                            (org-agenda-skip-function 'bh/skip-non-stuck-projects)))
-                (tags-todo "-CANCELLED/!"
-                           ((org-agenda-overriding-header "Projects")
-                            (org-agenda-skip-function 'bh/skip-non-projects)
-                            (org-tags-match-list-sublevels 'indented)
-                            (org-agenda-sorting-strategy
-                             '(category-keep))))
-                (todo "WAITING|SOMEDAY"
-                      ((org-agenda-overriding-header "Waiting and Postponed tasks")
-                       (org-agenda-skip-function 'bh/skip-projects-and-habits)))
-                (tags "-REFILE/"
-                      ((org-agenda-overriding-header "Tasks to Archive")
-                       (org-agenda-skip-function 'bh/skip-non-archivable-tasks))))
+                (tags "vis"
+                      ((org-agenda-overriding-header "Vis tag")
+                       (org-agenda-overriding-header "Vis tag")))
+                ;; (tags "REFILE"
+                ;;       ((org-agenda-overriding-header "Notes and Tasks to Refile")
+                ;;        (org-agenda-overriding-header "Tasks to Refile")))
+                ;; (tags-todo "-WAITING-CANCELLED/!NEXT|STARTED"
+                ;;            ((org-agenda-overriding-header "Next Tasks")
+                ;;             (org-agenda-skip-function 'bh/skip-projects-and-habits)
+                ;;             (org-agenda-todo-ignore-scheduled t)
+                ;;             (org-agenda-todo-ignore-deadlines t)
+                ;;             (org-tags-match-list-sublevels t)
+                ;;             (org-agenda-sorting-strategy
+                ;;              '(todo-state-down effort-up category-keep))))
+                ;; (tags-todo "-REFILE-CANCELLED/!-NEXT-STARTED-WAITING"
+                ;;            ((org-agenda-overriding-header "Tasks")
+                ;;             (org-agenda-skip-function 'bh/skip-projects-and-habits)
+                ;;             (org-tags-match-list-sublevels 'indented)
+                ;;             (org-agenda-todo-ignore-scheduled t)
+                ;;             (org-agenda-todo-ignore-deadlines t)
+                ;;             (org-agenda-sorting-strategy
+                ;;              '(category-keep))))
+                ;; (tags-todo "-CANCELLED/!"
+                ;;            ((org-agenda-overriding-header "Stuck Projects")
+                ;;             (org-tags-match-list-sublevels 'indented)
+                ;;             (org-agenda-skip-function 'bh/skip-non-stuck-projects)))
+                ;; (tags-todo "-CANCELLED/!"
+                ;;            ((org-agenda-overriding-header "Projects")
+                ;;             (org-agenda-skip-function 'bh/skip-non-projects)
+                ;;             (org-tags-match-list-sublevels 'indented)
+                ;;             (org-agenda-sorting-strategy
+                ;;              '(category-keep))))
+                ;; (todo "WAITING|SOMEDAY"
+                ;;       ((org-agenda-overriding-header "Waiting and Postponed tasks")
+                ;;        (org-agenda-skip-function 'bh/skip-projects-and-habits)))
+                ;; (tags "-REFILE/"
+                ;;       ((org-agenda-overriding-header "Tasks to Archive")
+                ;;        (org-agenda-skip-function 'bh/skip-non-archivable-tasks)))
+                )
+               nil)
+              ("x" "Milestones and commitments"
+               ((agenda ""
+                        ((org-agenda-skip-function
+                          '(org-agenda-skip-entry-if 'notregexp ":milestone:\\|:commit:" 'regexp ":russell:"))
+                         (org-deadline-warning-days 0)
+                         (org-agenda-span 60))))
                nil)
               ("r" "Tasks to Refile" tags "REFILE"
                ((org-agenda-overriding-header "Notes and Tasks to Refile")
@@ -207,8 +218,14 @@
                 (org-tags-match-list-sublevels 'indented)
                 (org-agenda-sorting-strategy
                  '(category-keep))))
-              ("w" "Waiting Tasks" todo "WAITING|SOMEDAY"
-               ((org-agenda-overriding-header "Waiting and Postponed tasks"))
+              ("w" "Waiting Tasks" todo "WAITING"
+               ((org-agenda-overriding-header "Waiting tasks"))
+               (org-agenda-skip-function 'bh/skip-projects-and-habits))
+              ("S" "Someday Tasks" todo "SOMEDAY"
+               ((org-agenda-overriding-header "Someday tasks"))
+               (org-agenda-skip-function 'bh/skip-projects-and-habits))
+              ("v" "Highly Visible" tags "vis"
+               ((org-agenda-overriding-header "Highly visible tasks"))
                (org-agenda-skip-function 'bh/skip-projects-and-habits))
               ("A" "Tasks to Archive" tags "-REFILE/"
                ((org-agenda-overriding-header "Tasks to Archive")
@@ -312,33 +329,36 @@
 (setq org-tags-match-list-sublevels nil)
 
 
-;; any headline with level <= 2 is a target
-(setq org-refile-targets '((nil :maxlevel . 2)
-                                ; all top-level headlines in the
-                                ; current buffer are used (first) as a
-                                ; refile target
-                           (org-agenda-files :maxlevel . 2)))
+; Targets include this file and any file contributing to the agenda - up to 9 levels deep
+(setq org-refile-targets (quote ((nil :maxlevel . 9)
+                                 (org-agenda-files :maxlevel . 9))))
 
-;; provide refile targets as paths, including the file name
-;; (without directory) as level 1 of the path
-(setq org-refile-use-outline-path 'file)
+; Use full outline paths for refile targets - we file directly with IDO
+(setq org-refile-use-outline-path t)
 
-;; allow to create new nodes (must be confirmed by the user) as
-;; refile targets
-(setq org-refile-allow-creating-parent-nodes 'confirm)
+; Targets complete directly with IDO
+(setq org-outline-path-complete-in-steps nil)
 
-;; refile only within the current buffer
-(defun my/org-refile-within-current-buffer ()
-  "Move the entry at point to another heading in the current buffer."
-  (interactive)
-  (let ((org-refile-targets '((nil :maxlevel . 5))))
-    (org-refile)))
+; Allow refile to create parent tasks with confirmation
+(setq org-refile-allow-creating-parent-nodes (quote confirm))
+
+; Use IDO for both buffer and file completion and ido-everywhere to t
+(setq org-completion-use-ido t)
+(setq ido-everywhere t)
+(setq ido-max-directory-size 100000)
+(ido-mode (quote both))
+; Use the current window when visiting files and buffers with ido
+(setq ido-default-file-method 'selected-window)
+(setq ido-default-buffer-method 'selected-window)
+; Use the current window for indirect buffer display
+(setq org-indirect-buffer-display 'current-window)
 
 ;;;; Refile settings
 ; Exclude DONE state tasks from refile targets
 (defun bh/verify-refile-target ()
   "Exclude todo keywords with a done state from refile targets"
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+
 (setq org-refile-target-verify-function 'bh/verify-refile-target)
 
 
@@ -952,4 +972,18 @@ When not restricted, skip project and sub-project tasks, habits, and project rel
 
 (require 'epa-file)
 (setq epg-gpg-program "/usr/local/bin/gpg")
+(setq epg-gpg-home-directory "/Users/zack/.gnupg")
 (setq epa-file-inhibit-auto-save t)
+
+;; haskell stuff
+(require 'package)
+(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-archives
+   (quote
+    (("gnu" . "http://elpa.gnu.org/packages/")
+     ("melpa-stable" . "http://stable.melpa.org/packages/")))))

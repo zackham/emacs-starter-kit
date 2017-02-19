@@ -1,2 +1,2 @@
-;; org-persist.el - zacks-imac-2 at <2014-03-21 Fri 11:58>
-(setq stored-clock-history '(("/Users/zack/org/rwgps.org" . 318168) ("/Users/zack/org/rwgps.org" . 319315) ("/Users/zack/org/rwgps.org" . 314577) ("/Users/zack/org/refile.org" . 9070) ("/Users/zack/org/rwgps.org" . 318346)))
+;; org-persist.el - Zacks-iMac-2 at <2017-02-18 Sat 08:43>
+(setq stored-clock-history '(("/Users/zack/org/system29.org.gpg" . 438493) ("/Users/zack/org/system29.org.gpg" . 438765) ("/Users/zack/org/system29.org.gpg" . 438996) ("/Users/zack/org/system29.org.gpg" . 439191) ("/Users/zack/org/system29.org.gpg" . 439402)))
